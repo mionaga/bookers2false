@@ -23,5 +23,10 @@
     <p>Title：<%= book.title %></p>
     <p>opinion：<%= book.body %></p>
     
+    <!--showページへのリンク-->
+    <%= link_to book_path(book.id) do %>
+    <%= image_tag book.get_image %>
+  <% end %>
+    
   </div>
 <% end %>
