@@ -1,2 +1,41 @@
-<h1>Users#index</h1>
-<p>Find me in app/views/users/index.html.erb</p>
+<!--user情報-->
+<h1>User info</h1>
+<div>
+  
+  <%= image_tag @users.get_profile_image(100,100) %>
+  
+  <h3>name<%= @users.name %></h3>
+  <h3>introduction<%= @users.body %></h3>
+  <p><%= link_to "プロフィール編集", users_path(@users.id)  %></p>
+
+</div>
+
+<!--NewBookの投稿-->
+<h1>New Book</h1>
+<%= form_with model: @book do |f| %>
+  <h4>画像</h4>
+  <%= f.file_field :image, accept: "image/*" %>
+  <h4>Title</h4>
+  <%= f.text_field :title %>
+  <h4>opinion</h4>
+  <%= f.text_area :body %>
+  <%= f.submit 'create book' %>
+  
+<% end %>
+
+<!--users-->
+<% @users.each do |user| %>
+  
+    <%= image_tag user.get_image %>
+    <p><%= image_tag 'no_image.jpg' %></p>
+    <p>name：<%= user.name %></p>
+
+    
+    <!--showページへのリンク-->
+    <%= link_to book_path(@book.id) do %>
+     <%= image_tag book.get_image %>
+    <% end %>
+    
+
+<% end %>
+

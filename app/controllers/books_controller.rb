@@ -1,20 +1,22 @@
 class BooksController < ApplicationController
   
-  #表示する場所はbooks/id,books,users/id,users,
-  #def new
-    #@books=Book.new
-  #end  
   
   
   def create
     @book = Book.new(book_params)
     @book.user_id = current_user.id
-    @book.save
-    redirect_to books_path(books.id)
+     if @book.save
+    redirect_to book_path(@book.id)
+     else 
+       @books= Book.all
+       render :index
+     end
   end
+  
   
   def show
     @book=Book.find(params[:id])
+    @user=@book.user
   end
 
   def edit
@@ -22,6 +24,7 @@ class BooksController < ApplicationController
 
   def index
     @books=Book.all
+    @user=@books.user
   end
   
   def destroy

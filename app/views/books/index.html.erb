@@ -1,6 +1,18 @@
 
 
+<!--user情報-->
+<h1>User info</h1>
+<div>
+  
+  <%= image_tag @user.get_profile_image(100,100) %>
+  
+  <h3>name<%= @user.name %></h3>
+  <h3>introduction<%= @user.body %></h3>
+  <p><%= link_to "プロフィール編集", users_path(@user.id)  %></p>
 
+</div>
+
+<!--NewBookの投稿-->
 <h1>New Book</h1>
 <%= form_with model: @book do |f| %>
   <h4>画像</h4>
@@ -19,14 +31,14 @@
 <% @books.each do |book| %>
   <div>
     <%= image_tag book.get_image %>
-    <p>投稿ユーザー画像：<%= image_tag 'sample-author1.jpg' %></p>
+    <p>投稿ユーザー画像：<%= image_tag 'no_image.jpg' %></p>
     <p>Title：<%= book.title %></p>
     <p>opinion：<%= book.body %></p>
     
     <!--showページへのリンク-->
-    <%= link_to book_path(book.id) do %>
-    <%= image_tag book.get_image %>
-  <% end %>
+    <%= link_to book_path(@book.id) do %>
+     <%= image_tag book.get_image %>
+    <% end %>
     
   </div>
 <% end %>

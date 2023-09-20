@@ -1,7 +1,9 @@
+<!--user情報-->
 <h1>User info</h1>
 <div>
   
   <%= image_tag @user.get_profile_image(100,100) %>
+  
   <h3>name<%= @user.name %></h3>
   <h3>introduction<%= @user.body %></h3>
   <p><%= link_to "プロフィール編集", users_path(@user.id)  %></p>
@@ -22,18 +24,19 @@
 <% end %>
 
 
-<!-- ユーザーの投稿一覧 -->
-<h1>Books</h1>
-
-<% @books.each do |book| %>
+<!--book詳細-->
 <div>
-  <%= image_tag book.get_image %>
-
-  <%= link_to book_path(book.id) do %> 
-  <p>Title：<%= book.title %></p>
+  <h2>Book detail</h2>
+  <%= image_tag @book.get_image %>
+  <p>Title：<%= @book.title %></p>
+  <p>opinion：<%= @book.body %></p>
+  <p>投稿ユーザー画像：<%= image_tag 'no_image.jpg' %></p>
+  <p>ユーザーネーム：<%= @book.user.name %></p>
+  <!--投稿日時-->
+  
+  <% if @book.user == current_user %>
+    <%= link_to"Edit",books_path(@book.id) %>
+    <%= link_to "destroy", book_path(@book), method: :delete %>
   <% end %>
+</div>  
   
-  <p>Opinion：<%= book.body %></p>
-  
-</div>
-<% end %>
