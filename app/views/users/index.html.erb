@@ -1,41 +1,58 @@
 <!--user情報-->
 <h1>User info</h1>
 <div>
-  
-  <%= image_tag @users.get_profile_image(100,100) %>
-  
-  <h3>name<%= @users.name %></h3>
-  <h3>introduction<%= @users.body %></h3>
-  <p><%= link_to "プロフィール編集", users_path(@users.id)  %></p>
+
+  <%= image_tag @user.get_profile_image(200,200)  %>
+
+  <h3>name<%= @user.name %></h3>
+  <h3>introduction<%= @user.body %></h3>
+  <p><%= link_to "プロフィール編集", users_path(@user.id)  %></p>
 
 </div>
 
 <!--NewBookの投稿-->
-<h1>New Book</h1>
-<%= form_with model: @book do |f| %>
-  <h4>画像</h4>
-  <%= f.file_field :image, accept: "image/*" %>
-  <h4>Title</h4>
-  <%= f.text_field :title %>
-  <h4>opinion</h4>
-  <%= f.text_area :body %>
-  <%= f.submit 'create book' %>
-  
-<% end %>
+<div>
+  <h1>New Book</h1>
+  <%= form_with model: @book do |f| %>
+
+    <h4>Title</h4>
+    <%= f.text_field :title %>
+    <h4>opinion</h4>
+    <%= f.text_area :body %>
+    <%= f.submit 'create book' %>
+
+  <% end %>
+</div>
 
 <!--users-->
-<% @users.each do |user| %>
-  
-    <%= image_tag user.get_image %>
-    <p><%= image_tag 'no_image.jpg' %></p>
-    <p>name：<%= user.name %></p>
+<h1>Users</h1>
 
-    
-    <!--showページへのリンク-->
-    <%= link_to book_path(@book.id) do %>
-     <%= image_tag book.get_image %>
-    <% end %>
-    
+<table class="users-table">
+  <thead>
+    <th>image</th>
+    <th>name</th>
+  </thead>
 
-<% end %>
+    <tbody>
+      <% @users.each do |user| %>
+      <tr>
+        <td><%= image_tag user.get_profile_image(100,100) %></td>
+        <td> name </td>
+        <td><%= user.name %></td>
+        <td><%= link_to "Show",user_path(user.id) %></td>
+      </tr>
+
+
+      <% end %>
+    </tbody>
+
+</table>
+
+
+
+
+
+
+
+
 
