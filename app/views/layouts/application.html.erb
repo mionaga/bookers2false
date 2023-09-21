@@ -16,6 +16,9 @@
     <% if user_signed_in? %>
      <ul>
       <li>
+         <%=link_to "Bookers", "user_path(current_user.id)" %>
+      </li>
+      <li>
         <%=link_to user_path(current_user.id) do %>
          <i class="fa-solid fa-house"></i>Home
         <% end %>
@@ -36,24 +39,37 @@
          <i class="fa-solid fa-right-from-bracket"></i>Log Out
         <% end %>
       </li>
-    </ul>  
+    </ul>
     <% else %>
      <ul>
-      <li> <%=link_to "/" do %>
-         <i class="fa-solid fa-house"></i>Home
+      <li><%=link_to "Bookers",root_path %>
+      </li>
+      <li><%=link_to root_path do %>
+       <i class="fa-solid fa-house"></i>Home
         <% end %>
       </li>
 
-
       <li>
-        <%= link_to "Sign up", new_user_registration_path %>
+        <%=link_to about_path do %>
+         <i class="fa-solid  fa-link"></i>About
+        <% end %>
       </li>
       <li>
-        <%= link_to "Log in", new_user_session_path %>
+        <%=link_to new_user_session_path do %>
+         <i class="fa-solid fa-user-plus"></i>Sign up
+        <% end %>
       </li>
-    </ul>  
-    <% end %>
+      <li>
+        <%=link_to user_session_path,method: :post do %>
+         <i class="fa-solid fa-right-to-bracket"></i>Log in
+        <% end %>
+      </li>
+   </ul>
+   <% end %>
   </header>
+
+
+
     <%= yield %>
   </body>
 </html>
