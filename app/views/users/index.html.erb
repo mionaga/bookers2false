@@ -1,28 +1,7 @@
 <!--user情報-->
-<h1>User info</h1>
-<div>
-
-  <%= image_tag @user.get_profile_image(200,200)  %>
-
-  <h3>name<%= @user.name %></h3>
-  <h3>introduction<%= @user.body %></h3>
-  <p><%= link_to "プロフィール編集", users_path(@user.id)  %></p>
-
-</div>
-
+<%= render 'books/info', user:@user %>
 <!--NewBookの投稿-->
-<div>
-  <h1>New Book</h1>
-  <%= form_with model: @book do |f| %>
-
-    <h4>Title</h4>
-    <%= f.text_field :title %>
-    <h4>opinion</h4>
-    <%= f.text_area :body %>
-    <%= f.submit 'create book' %>
-
-  <% end %>
-</div>
+<%= render 'books/create_book', book:@book  %>
 
 <!--users-->
 <h1>Users</h1>
@@ -37,9 +16,8 @@
       <% @users.each do |user| %>
       <tr>
         <td><%= image_tag user.get_profile_image(100,100) %></td>
-        <td> name </td>
         <td><%= user.name %></td>
-        <td><%= link_to "Show",user_path(user.id) %></td>
+        <td><%= link_to "Show",user_path(@user.id) %></td>
       </tr>
 
 
